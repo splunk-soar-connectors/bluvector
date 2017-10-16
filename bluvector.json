@@ -1,0 +1,531 @@
+{
+    "app_version": "1.0.5",
+    "appid": "C4D4B8FB-2ED7-4C98-850F-09E7D5D3754D",
+    "appname": "bluvector",
+    "name": "BluVector",
+    "description": "This app allows executing actions like 'hunt file', 'detonate file', and 'event lookup'.",
+    "type": "information service",
+    "main_module": "bluvector_connector.pyc",
+    "product_vendor": "BluVector",
+    "product_name": "BluVector",
+    "product_version_regex": ".*",
+    "logo": "bluvector.png",
+    "min_phantom_version": "1.1.72",
+    "publisher": "BluVector",
+    "python_version": "2.7",
+    "package_name": "phantom_bluvector",
+    "license": "Copyright (c) Acuity Solutions Corporation 2016",
+    "configuration": {
+        "api_key": {
+            "description": "BluVector API Key",
+            "data_type": "string",
+            "required": true,
+            "order": 2
+        },
+        "bv_server": {
+            "description": "BluVector IP/Hostname",
+            "data_type": "string",
+            "required": true,
+            "order": 0
+        },
+        "verify_ssl_cert": {
+            "description": "Verify Server SSL Certificate",
+            "data_type": "boolean",
+            "default": false,
+            "required": false,
+            "order": 1
+        }
+    },
+    "actions": [
+        {
+            "action": "on poll",
+            "description": "Callback action for the on_poll ingest functionality.",
+            "type": "ingest",
+            "identifier": "on_poll",
+            "read_only": true,
+            "parameters": {
+                "container_id": {
+                    "data_type": "string",
+                    "order": 0,
+                    "description": "Container IDs to limit the ingestion to.",
+                    "allow_list": true
+                },
+                "start_time": {
+                    "data_type": "numeric",
+                    "order": 1,
+                    "description": "Start of time range, in epoch time (milliseconds)",
+                    "verbose": "If not specified, the default is past 10 days"
+                },
+                "end_time": {
+                    "data_type": "numeric",
+                    "order": 2,
+                    "description": "End of time range, in epoch time (milliseconds)",
+                    "verbose": "If not specified, the default is now"
+                },
+                "container_count": {
+                    "data_type": "numeric",
+                    "order": 3,
+                    "description": "Maximum number of container records to query for."
+                },
+                "artifact_count": {
+                    "data_type": "numeric",
+                    "order": 4,
+                    "description": "Maximum number of artifact records to query for."
+                }
+            },
+            "output": [],
+            "versions":"EQ(*)"
+        },
+        {
+            "action": "test connectivity",
+            "description": "Validate the asset configuration for connectivity.",
+            "type": "test",
+            "identifier": "test_asset_connectivity",
+            "read_only": true,
+            "parameters": {},
+            "output": [],
+            "versions": "EQ(*)"
+        },
+        {
+            "action": "event lookup",
+            "description": "Lookup a BluVector event using the Event ID.",
+            "type": "investigate",
+            "identifier": "event_lookup",
+            "read_only": true,
+            "render": {
+                "width": 8,
+                "title": "Event Lookup",
+                "type": "table",
+                "height": 5
+            },
+            "parameters": {
+            	"bluvector_event_id": {
+                    "contains": [
+                        "bluvector event id"
+                    ],
+                    "data_type": "string",
+                    "description": "BluVector Event ID of event to lookup.",
+                    "order": 0,
+                    "primary": true,
+                    "required": true
+                }    
+            },
+            "output": [
+                {
+                    "data_path": "action_result.status",
+                    "data_type": "string"
+                },
+                {
+                    "data_path": "action_result.message",
+                    "data_type": "string"
+                },
+                {
+                    "column_name": "BV Event ID",
+                    "column_order": 0,
+                    "contains": ["bluvector event id"],
+                    "data_path": "action_result.summary.bluvector_event_id",
+                    "data_type": "string"
+                },
+                {
+                    "column_name": "BV Event Status",
+                    "column_order": 1,
+                    "data_path": "action_result.summary.event_status",
+                    "data_type": "string"
+                },
+                {
+                    "column_name": "Network Application",
+                    "column_order": 2,
+                    "contains": ["network application"],
+                    "data_path": "action_result.summary.app",
+                    "data_type": "string"
+                },
+                {
+                    "column_name": "BV File Status",
+                    "column_order": 3,
+                    "data_path": "action_result.summary.file_status",
+                    "data_type": "string"
+                },
+                {
+                    "column_name": "BluVector Flags",
+                    "column_order": 4,
+                    "data_path": "action_result.summary.flags",
+                    "data_type": "string"
+                },
+                {
+                    "column_name": "File Name",
+                    "column_order": 5,
+                    "contains": ["file name"],
+                    "data_path": "action_result.summary.fname",
+                    "data_type": "string"
+                },
+                {
+                    "column_name": "File Type",
+                    "column_order": 6,
+                    "data_path": "action_result.summary.ftype",
+                    "data_type": "string"
+                },
+                {
+                    "column_name": "MD5",
+                    "column_order": 7,
+                    "contains": ["md5", "hash"],
+                    "data_path": "action_result.summary.md5",
+                    "data_type": "string"
+                },
+                {
+                    "column_name": "SHA256",
+                    "column_order": 8,
+                    "contains": ["sha256", "hash"],
+                    "data_path": "action_result.summary.sha256",
+                    "data_type": "string"
+                },
+                {
+                    "data_path": "action_result.summary.filesize",
+                    "data_type": "numeric"
+                },
+                {
+                    "data_path": "action_result.summary.timestamp",
+                    "data_type": "string"
+                },
+                {
+                    "data_path": "action_result.summary.yara_file",
+                    "data_type": "string"
+                },
+                {
+                    "data_path": "action_result.summary.yara_rule",
+                    "data_type": "string"
+                },
+                {
+                    "data_path": "action_result.summary.hector_confidence",
+                    "data_type": "numeric"
+                },
+                {
+                    "data_path": "action_result.parameter.hash",
+                    "data_type": "string"
+                },
+                {
+                    "data_path": "summary.total_objects",
+                    "data_type": "numeric"
+                },
+                {
+                    "data_path": "summary.total_objects_successful",
+                    "data_type": "numeric"
+                }
+            ],
+            "versions": "EQ(*)"
+        },
+        {
+            "action": "detonate file",
+            "description": "Send file from the file vault to BluVector for analysis.",
+            "type": "investigate",
+            "identifier": "detonate_file",
+            "read_only": true,
+            "render": {
+                "width": 8,
+                "title": "Detonate File",
+                "type": "table",
+                "height": 5
+            },
+            "parameters": {
+            	"vault_id": {
+                    "contains": [
+                        "apk",
+                        "doc",
+                        "flash",
+                        "jar",
+                        "pdf",
+                        "pe file",
+                        "ppt",
+                        "vault id",
+                        "xls"
+                    ],
+                    "data_type": "string",
+                    "description": "Vault ID of file to send to BluVector for analysis.",
+                    "order": 0,
+                    "primary": true,
+                    "required": true
+                }    
+            },
+            "output": [
+                {
+                    "data_path": "action_result.status",
+                    "data_type": "string"
+                },
+                {
+                    "data_path": "action_result.message",
+                    "data_type": "string"
+                },
+                {
+                    "column_name": "BV Event ID",
+                    "column_order": 0,
+                    "contains": ["bluvector event id"],
+                    "data_path": "action_result.summary.bluvector_event_id",
+                    "data_type": "string"
+                },
+                {
+                    "column_name": "BV Event Status",
+                    "column_order": 1,
+                    "data_path": "action_result.summary.event_status",
+                    "data_type": "string"
+                },
+                {
+                    "column_name": "Network Application",
+                    "column_order": 2,
+                    "contains": ["network application"],
+                    "data_path": "action_result.summary.app",
+                    "data_type": "string"
+                },
+                {
+                    "column_name": "BV File Status",
+                    "column_order": 3,
+                    "data_path": "action_result.summary.file_status",
+                    "data_type": "string"
+                },
+                {
+                    "column_name": "BluVector Flags",
+                    "column_order": 4,
+                    "data_path": "action_result.summary.flags",
+                    "data_type": "string"
+                },
+                {
+                    "column_name": "File Name",
+                    "column_order": 5,
+                    "contains": ["file name"],
+                    "data_path": "action_result.summary.fname",
+                    "data_type": "string"
+                },
+                {
+                    "column_name": "File Type",
+                    "column_order": 6,
+                    "data_path": "action_result.summary.ftype",
+                    "data_type": "string"
+                },
+                {
+                    "column_name": "MD5",
+                    "column_order": 7,
+                    "contains": ["md5", "hash"],
+                    "data_path": "action_result.summary.md5",
+                    "data_type": "string"
+                },
+                {
+                    "column_name": "SHA256",
+                    "column_order": 8,
+                    "contains": ["sha256", "hash"],
+                    "data_path": "action_result.summary.sha256",
+                    "data_type": "string"
+                },
+                {
+                    "data_path": "action_result.summary.filesize",
+                    "data_type": "numeric"
+                },
+                {
+                    "data_path": "action_result.summary.timestamp",
+                    "data_type": "string"
+                },
+                {
+                    "data_path": "action_result.summary.yara_file",
+                    "data_type": "string"
+                },
+                {
+                    "data_path": "action_result.summary.yara_rule",
+                    "data_type": "string"
+                },
+                {
+                    "data_path": "action_result.summary.hector_confidence",
+                    "data_type": "numeric"
+                },
+                {
+                    "data_path": "action_result.parameter.hash",
+                    "data_type": "string"
+                },
+                {
+                    "data_path": "summary.total_objects",
+                    "data_type": "numeric"
+                },
+                {
+                    "data_path": "summary.total_objects_successful",
+                    "data_type": "numeric"
+                }
+            ],
+            "versions": "EQ(*)"
+        },
+        {
+            "action": "hunt file",
+            "description": "Query BluVector for hash. [md5, sha256]",
+            "type": "investigate",
+            "identifier": "hunt_file",
+            "read_only": true,
+            "parameters": {
+                "hash": {
+                    "description": "hash of the file to be queried",
+                    "data_type": "string",
+                    "contains": ["hash","sha256","md5"],
+                    "required": true
+                } 
+            },
+            "render": {
+                "width": 12,
+                "title": "Hunt File",
+                "type": "table",
+                "height": 5
+            },
+            "output": [
+                {
+                    "data_path": "action_result.status",
+                    "data_type": "string"
+                },
+                {
+                    "data_path": "action_result.message",
+                    "data_type": "string"
+                },
+                {
+                    "column_name": "BV Event ID",
+                    "column_order": 0,
+                    "contains": ["bluvector event id"],
+                    "data_path": "action_result.summary.bluvector_event_id",
+                    "data_type": "string"
+                },
+                {
+                    "column_name": "BV Event Status",
+                    "column_order": 1,
+                    "data_path": "action_result.summary.event_status",
+                    "data_type": "string"
+                },
+                {
+                    "column_name": "Network Application",
+                    "column_order": 2,
+                    "contains": ["network application"],
+                    "data_path": "action_result.summary.app",
+                    "data_type": "string"
+                },
+                {
+                    "column_name": "Source IP",
+                    "column_order": 3,
+                    "contains": ["ip"],
+                    "data_path": "action_result.summary.src",
+                    "data_type": "string"
+                },
+                {
+                    "column_name": "Source Port",
+                    "column_order": 4,
+                    "contains": ["port"],
+                    "data_path": "action_result.summary.src_port",
+                    "data_type": "string"
+                },
+                {
+                    "column_name": "Destination IP",
+                    "column_order": 5,
+                    "contains": ["ip"],
+                    "data_path": "action_result.summary.dest",
+                    "data_type": "string"
+                },
+                {
+                    "column_name": "Destination Port",
+                    "column_order": 6,
+                    "contains": ["port"],
+                    "data_path": "action_result.summary.dest_port",
+                    "data_type": "string"
+                },
+                {
+                    "column_name": "Hostname",
+                    "column_order": 7,
+                    "contains": ["host name"],
+                    "data_path": "action_result.summary.host",
+                    "data_type": "string"
+                },
+                {
+                    "column_name": "From",
+                    "column_order": 8,
+                    "contains": ["email"],
+                    "data_path": "action_result.summary.from",
+                    "data_type": "string"
+                },
+                {
+                    "column_name": "To",
+                    "column_order": 9,
+                    "contains": ["email"],
+                    "data_path": "action_result.summary.to",
+                    "data_type": "string"
+                },
+                {
+                    "column_name": "URL",
+                    "column_order": 10,
+                    "contains": ["url"],
+                    "data_path": "action_result.summary.url",
+                    "data_type": "string"
+                },
+                {
+                    "column_name": "BV File Status",
+                    "column_order": 8,
+                    "data_path": "action_result.summary.file_status",
+                    "data_type": "string"
+                },
+                {
+                    "column_name": "BluVector Flags",
+                    "column_order": 9,
+                    "data_path": "action_result.summary.flags",
+                    "data_type": "string"
+                },
+                {
+                    "column_name": "File Name",
+                    "column_order": 10,
+                    "contains": ["file name"],
+                    "data_path": "action_result.summary.fname",
+                    "data_type": "string"
+                },
+                {
+                    "column_name": "File Type",
+                    "column_order": 11,
+                    "data_path": "action_result.summary.ftype",
+                    "data_type": "string"
+                },
+                {
+                    "column_name": "MD5",
+                    "column_order": 12,
+                    "contains": ["md5", "hash"],
+                    "data_path": "action_result.summary.md5",
+                    "data_type": "string"
+                },
+                {
+                    "column_name": "SHA256",
+                    "column_order": 13,
+                    "contains": ["sha256", "hash"],
+                    "data_path": "action_result.summary.sha256",
+                    "data_type": "string"
+                },
+                {
+                    "data_path": "action_result.summary.filesize",
+                    "data_type": "numeric"
+                },
+                {
+                    "data_path": "action_result.summary.timestamp",
+                    "data_type": "string"
+                },
+                {
+                    "data_path": "action_result.summary.yara_file",
+                    "data_type": "string"
+                },
+                {
+                    "data_path": "action_result.summary.yara_rule",
+                    "data_type": "string"
+                },
+                {
+                    "data_path": "action_result.summary.hector_confidence",
+                    "data_type": "numeric"
+                },
+                {
+                    "data_path": "action_result.parameter.hash",
+                    "data_type": "string"
+                },
+                {
+                    "data_path": "summary.total_objects",
+                    "data_type": "numeric"
+                },
+                {
+                    "data_path": "summary.total_objects_successful",
+                    "data_type": "numeric"
+                }
+            ],
+            "versions": "EQ(*)"
+        }
+    ]
+}
