@@ -1,5 +1,5 @@
 {
-    "app_version": "1.0.5",
+    "app_version": "1.0.6",
     "appid": "C4D4B8FB-2ED7-4C98-850F-09E7D5D3754D",
     "appname": "bluvector",
     "name": "BluVector",
@@ -74,7 +74,7 @@
                 }
             },
             "output": [],
-            "versions":"EQ(*)"
+            "versions": "EQ(*)"
         },
         {
             "action": "test connectivity",
@@ -99,7 +99,7 @@
                 "height": 5
             },
             "parameters": {
-            	"bluvector_event_id": {
+                "bluvector_event_id": {
                     "contains": [
                         "bluvector event id"
                     ],
@@ -108,7 +108,7 @@
                     "order": 0,
                     "primary": true,
                     "required": true
-                }    
+                }
             },
             "output": [
                 {
@@ -122,7 +122,9 @@
                 {
                     "column_name": "BV Event ID",
                     "column_order": 0,
-                    "contains": ["bluvector event id"],
+                    "contains": [
+                        "bluvector event id"
+                    ],
                     "data_path": "action_result.summary.bluvector_event_id",
                     "data_type": "string"
                 },
@@ -135,7 +137,9 @@
                 {
                     "column_name": "Network Application",
                     "column_order": 2,
-                    "contains": ["network application"],
+                    "contains": [
+                        "network application"
+                    ],
                     "data_path": "action_result.summary.app",
                     "data_type": "string"
                 },
@@ -154,7 +158,9 @@
                 {
                     "column_name": "File Name",
                     "column_order": 5,
-                    "contains": ["file name"],
+                    "contains": [
+                        "file name"
+                    ],
                     "data_path": "action_result.summary.fname",
                     "data_type": "string"
                 },
@@ -167,14 +173,20 @@
                 {
                     "column_name": "MD5",
                     "column_order": 7,
-                    "contains": ["md5", "hash"],
+                    "contains": [
+                        "md5",
+                        "hash"
+                    ],
                     "data_path": "action_result.summary.md5",
                     "data_type": "string"
                 },
                 {
                     "column_name": "SHA256",
                     "column_order": 8,
-                    "contains": ["sha256", "hash"],
+                    "contains": [
+                        "sha256",
+                        "hash"
+                    ],
                     "data_path": "action_result.summary.sha256",
                     "data_type": "string"
                 },
@@ -226,7 +238,7 @@
                 "height": 5
             },
             "parameters": {
-            	"vault_id": {
+                "vault_id": {
                     "contains": [
                         "apk",
                         "doc",
@@ -243,7 +255,7 @@
                     "order": 0,
                     "primary": true,
                     "required": true
-                }    
+                }
             },
             "output": [
                 {
@@ -257,7 +269,9 @@
                 {
                     "column_name": "BV Event ID",
                     "column_order": 0,
-                    "contains": ["bluvector event id"],
+                    "contains": [
+                        "bluvector event id"
+                    ],
                     "data_path": "action_result.summary.bluvector_event_id",
                     "data_type": "string"
                 },
@@ -270,7 +284,9 @@
                 {
                     "column_name": "Network Application",
                     "column_order": 2,
-                    "contains": ["network application"],
+                    "contains": [
+                        "network application"
+                    ],
                     "data_path": "action_result.summary.app",
                     "data_type": "string"
                 },
@@ -289,7 +305,9 @@
                 {
                     "column_name": "File Name",
                     "column_order": 5,
-                    "contains": ["file name"],
+                    "contains": [
+                        "file name"
+                    ],
                     "data_path": "action_result.summary.fname",
                     "data_type": "string"
                 },
@@ -302,14 +320,20 @@
                 {
                     "column_name": "MD5",
                     "column_order": 7,
-                    "contains": ["md5", "hash"],
+                    "contains": [
+                        "md5",
+                        "hash"
+                    ],
                     "data_path": "action_result.summary.md5",
                     "data_type": "string"
                 },
                 {
                     "column_name": "SHA256",
                     "column_order": 8,
-                    "contains": ["sha256", "hash"],
+                    "contains": [
+                        "sha256",
+                        "hash"
+                    ],
                     "data_path": "action_result.summary.sha256",
                     "data_type": "string"
                 },
@@ -358,9 +382,13 @@
                 "hash": {
                     "description": "hash of the file to be queried",
                     "data_type": "string",
-                    "contains": ["hash","sha256","md5"],
+                    "contains": [
+                        "hash",
+                        "sha256",
+                        "md5"
+                    ],
                     "required": true
-                } 
+                }
             },
             "render": {
                 "width": 12,
@@ -380,7 +408,9 @@
                 {
                     "column_name": "BV Event ID",
                     "column_order": 0,
-                    "contains": ["bluvector event id"],
+                    "contains": [
+                        "bluvector event id"
+                    ],
                     "data_path": "action_result.summary.bluvector_event_id",
                     "data_type": "string"
                 },
@@ -393,63 +423,81 @@
                 {
                     "column_name": "Network Application",
                     "column_order": 2,
-                    "contains": ["network application"],
+                    "contains": [
+                        "network application"
+                    ],
                     "data_path": "action_result.summary.app",
                     "data_type": "string"
                 },
                 {
                     "column_name": "Source IP",
                     "column_order": 3,
-                    "contains": ["ip"],
+                    "contains": [
+                        "ip"
+                    ],
                     "data_path": "action_result.summary.src",
                     "data_type": "string"
                 },
                 {
                     "column_name": "Source Port",
                     "column_order": 4,
-                    "contains": ["port"],
+                    "contains": [
+                        "port"
+                    ],
                     "data_path": "action_result.summary.src_port",
                     "data_type": "string"
                 },
                 {
                     "column_name": "Destination IP",
                     "column_order": 5,
-                    "contains": ["ip"],
+                    "contains": [
+                        "ip"
+                    ],
                     "data_path": "action_result.summary.dest",
                     "data_type": "string"
                 },
                 {
                     "column_name": "Destination Port",
                     "column_order": 6,
-                    "contains": ["port"],
+                    "contains": [
+                        "port"
+                    ],
                     "data_path": "action_result.summary.dest_port",
                     "data_type": "string"
                 },
                 {
                     "column_name": "Hostname",
                     "column_order": 7,
-                    "contains": ["host name"],
+                    "contains": [
+                        "host name"
+                    ],
                     "data_path": "action_result.summary.host",
                     "data_type": "string"
                 },
                 {
                     "column_name": "From",
                     "column_order": 8,
-                    "contains": ["email"],
+                    "contains": [
+                        "email"
+                    ],
                     "data_path": "action_result.summary.from",
                     "data_type": "string"
                 },
                 {
                     "column_name": "To",
                     "column_order": 9,
-                    "contains": ["email"],
+                    "contains": [
+                        "email"
+                    ],
                     "data_path": "action_result.summary.to",
                     "data_type": "string"
                 },
                 {
                     "column_name": "URL",
                     "column_order": 10,
-                    "contains": ["url"],
+                    "contains": [
+                        "url"
+                    ],
                     "data_path": "action_result.summary.url",
                     "data_type": "string"
                 },
@@ -468,7 +516,9 @@
                 {
                     "column_name": "File Name",
                     "column_order": 10,
-                    "contains": ["file name"],
+                    "contains": [
+                        "file name"
+                    ],
                     "data_path": "action_result.summary.fname",
                     "data_type": "string"
                 },
@@ -481,14 +531,20 @@
                 {
                     "column_name": "MD5",
                     "column_order": 12,
-                    "contains": ["md5", "hash"],
+                    "contains": [
+                        "md5",
+                        "hash"
+                    ],
                     "data_path": "action_result.summary.md5",
                     "data_type": "string"
                 },
                 {
                     "column_name": "SHA256",
                     "column_order": 13,
-                    "contains": ["sha256", "hash"],
+                    "contains": [
+                        "sha256",
+                        "hash"
+                    ],
                     "data_path": "action_result.summary.sha256",
                     "data_type": "string"
                 },
@@ -527,5 +583,6 @@
             ],
             "versions": "EQ(*)"
         }
-    ]
+    ],
+    "utctime_updated": "2017-11-30T22:45:42.000000Z"
 }
