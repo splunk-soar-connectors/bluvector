@@ -1,5 +1,5 @@
 {
-    "app_version": "1.0.6",
+    "app_version": "1.0.7",
     "appid": "C4D4B8FB-2ED7-4C98-850F-09E7D5D3754D",
     "appname": "bluvector",
     "name": "BluVector",
@@ -584,7 +584,7 @@
             "versions": "EQ(*)"
         }
     ],
-    "utctime_updated": "2017-11-30T22:45:42.000000Z",
+    "utctime_updated": "2022-01-07T20:15:31.000000Z",
     "pip_dependencies": {
         "wheel": [
             {
